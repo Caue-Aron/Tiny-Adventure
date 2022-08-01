@@ -1,9 +1,12 @@
 --[[
-TODO:
-  - add a bit of extra speed when getting out of a roll
+  
 ]]
+local debugger = require('debugger.debugger')
+debugger.start()
+
 
 require 'general.general'
+local camera = require 'orthographic.camera'
 
 local nutsprite = '#sprite'
 
@@ -18,19 +21,30 @@ local roll_left = hash 'roll-left'
 local idle_right = hash 'idle-right'
 local walk_right = hash 'walk-right'
 local roll_right = hash 'roll-right'
+local crouch_right = hash 'crouch-right'
 
 local idle_up = hash 'idle-up'
 local walk_up = hash 'walk-up'
 local roll_up = hash 'roll-up'
 
+local default_anim = idle_down
 
 local dir_right = 'r'
 local dir_down = 'd'
 local dir_up = 'u'
 local dir_left = 'l'
 
-go.property('speed', 50)
-go.property('rolling_speed', 300)
+local function set_x_pos(x)
+  
+end
+
+local function set_x_pos(x)
+  
+end
+
+local function set_xy_pos(x, y)
+  
+end
 
 function acquire_input ()
   msg.post('.', hash('acquire_input_focus'))
@@ -43,22 +57,32 @@ function quick_animation(self, sprite, anim)
   end
 end
 
+go.property('walking_speed', 50)
+go.property('crouch_max_speed', 225)
+go.property('crouch_accel', 7)
+
+go.property('friction', 0.5)
+
 function init(self)
   self.correction = vmath.vector3()
-  acquire_input()
   self.dir = vmath.vector3()
-  self.actual_speed = self.speed
-  self.rolling = false
+  self.last_dir_vector = self.dir
+  self.speed = vmath.vector3()
   self.can_move = true
   self.last_dir = nil
   self.current_anim = nil
-  self.start_decresing_rolling_speed = false
-  self.rolling_decrease = 10
-  self.can_roll = false
   self.can_crouch = true
+  self.crouching = false
+  self.started_crouch = false
+  self.crouching_mod_vector = vmath.vector3()
+  self.slide_effect = 1
+  self.dx = 0
+  self.dy = 0
+  
+  acquire_input()
 end
 
-function slide_on_collision(self, message)
+local function slide_on_collision(self, message)
   local group = message.other_group
   if
     group == collisions.map_terrain or
@@ -92,14 +116,10 @@ local function animation_done(self, message)
     [roll_down] = end_rolling,
   } 
   
-  local id = message.id
-  if jumpt[id] then
-    jumpt[id]()
-  end
+  if jumpt[message.id] then jumpt[message.id]() end
 end
 
 function on_message(self, message_id, message)
-  -- Handle collision
   if message_id == hash "contact_point_response" then
     slide_on_collision(self, message)
 
@@ -108,32 +128,20 @@ function on_message(self, message_id, message)
   end  
 end
 
-function update_animation(self)
-  local anim = idle_down
+local function update_animation(self)
+  local anim = default_anim
 
   if self.dir.x > 0 then
     anim = walk_right
-    if self.rolling then
-      anim = roll_right
-    end
 
   elseif self.dir.x < 0 then
     anim = walk_left
-    if self.rolling then
-      anim = roll_left
-    end
 
   elseif self.dir.y > 0 then
     anim = walk_up
-    if self.rolling then
-      anim = roll_up
-    end
 
   elseif self.dir.y < 0 then
     anim = walk_down
-    if self.rolling then
-      anim = roll_down
-    end
 
   else
     if self.last_dir == dir_down then
@@ -150,48 +158,31 @@ function update_animation(self)
     end
   end
 
-
-
   quick_animation(self, nutsprite, anim)
 end
 
-function update_move(self, dt)
-  if vmath.length_sqr(self.dir) > 1 then
-    self.dir = vmath.normalize(self.dir)
-  end
+local function update_move(self, dt)
+  local z = go.get_position().z
+  go.set_position(vmath.vector3(
+    go.get_position().x + self.dx * self.walking_speed * dt,
+    go.get_position().y + self.dy * self.walking_speed * dt,
+    z))
 
-  if self.rolling then
-    if not self.start_decresing_rolling_speed then
-      self.actual_speed = self.rolling_speed
-      self.start_decresing_rolling_speed = true
-    end
+  self.dx = self.dx * (1 - self.friction)
+  self.dy = self.dy * (1 - self.friction)
 
-    if self.last_dir == dir_down then
-      self.dir.y = -1
+  local kx = self.dir.x
+  local ky = self.dir.y
 
-    elseif self.last_dir == dir_left then
-      self.dir.x = -1
-      
-    elseif self.last_dir == dir_right then
-      self.dir.x = 1
+  self.dx = self.dx + kx
+  self.dy = self.dy + ky
 
-    elseif self.last_dir == dir_up then
-      self.dir.y = 1
-    end
-  end
-  
-  local p = go.get_position()
-  go.set_position(p + self.dir * self.actual_speed * dt)
+  go.set_position(vmath.vector3(go.get_position().x, go.get_position().y, z))
 end
 
-function reset_vars(self)
+local function reset_vars(self)
   self.dir = vmath.vector3()
   self.correction = vmath.vector3()
-  if self.rolling then
-    self.can_move = false
-  else
-    self.can_move = true
-  end
 end
 
 function update(self, dt)
@@ -203,45 +194,61 @@ end
 local function input_move(self, action_id, action)
   if self.can_move then
     if action_id == key.down then
-      self.dir.y = -1
-      self.last_dir = dir_down
-      self.can_roll = true
-
       if action.released then
-        self.can_roll = false
+        self.moving = false
+      
+      else
+        self.dir.y = -1
+        self.last_dir = dir_down
+        self.moving = true
       end
 
     elseif action_id == key.up then
-      self.dir.y = 1
-      self.last_dir = dir_up
-      self.can_roll = true
-
       if action.released then
-        self.can_roll = false
+        self.moving = false
+      else
+        self.dir.y = 1
+        self.last_dir = dir_up
+        self.moving = true
       end
 
     elseif action_id == key.left then
-      self.dir.x = -1
-      self.last_dir = dir_left
-      self.can_roll = true
-
       if action.released then
-        self.can_roll = false
+        self.moving = false 
+      else
+        self.dir.x = -1
+        self.last_dir = dir_left
+        self.moving = true
       end
 
     elseif action_id == key.right then
-      self.dir.x = 1
-      self.last_dir = dir_right
-      self.can_roll = true
-
       if action.released then
-        self.can_roll = false
+        self.moving = false 
+      else
+        self.dir.x = 1
+        self.last_dir = dir_right
+        self.moving = true
       end
+
+    end
+    
+    if self.moving then
+      self.last_dir_vector = self.dir
     end
   end
 
-  if action_id == key.action and action.pressed and self.can_roll then
-    self.rolling = true
+
+
+  if action_id == key.action and self.can_crouch then
+    if action.pressed then
+      self.started_crouch = true
+      self.crouching = true
+      self.can_crouch = false
+
+    elseif action.released then
+      self.crouching = false
+      self.can_crouch = true
+    end
   end
 
 end

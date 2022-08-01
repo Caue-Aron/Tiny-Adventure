@@ -103,14 +103,16 @@
         "spine",
         "sprite",
         "json",
-        "window"
+        "window",
+        "collisions"
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global",
         "trailing-space",
         "redefined-local",
         "missing-parameter",
-        "param-type-mismatch"
+        "param-type-mismatch",
+        "undefined-global"
     ],
     "Lua.workspace.ignoreDir": [
         ".vscode",

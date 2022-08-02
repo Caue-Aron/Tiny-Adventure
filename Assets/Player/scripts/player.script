@@ -5,8 +5,8 @@ local debugger = require('debugger.debugger')
 debugger.start()
 
 
-require 'general.general'
-local camera = require 'orthographic.camera'
+require 'Assets.Modules.general.general'
+local camera = require 'Assets.libs.orthographic.camera'
 
 local nutsprite = '#sprite'
 
@@ -35,15 +35,15 @@ local dir_up = 'u'
 local dir_left = 'l'
 
 local function set_x_pos(x)
-  
+  go.set_position(vmath.vector3(x, go.get_position().y, go.get_position().z))
 end
 
-local function set_x_pos(x)
-  
+local function set_y_pos(x)
+  go.set_position(vmath.vector3(go.get_position().x, y, go.get_position().z))
 end
 
 local function set_xy_pos(x, y)
-  
+  go.set_position(vmath.vector3(x, y, go.get_position().z))
 end
 
 function acquire_input ()
@@ -57,11 +57,14 @@ function quick_animation(self, sprite, anim)
   end
 end
 
-go.property('walking_speed', 50)
-go.property('crouch_max_speed', 225)
-go.property('crouch_accel', 7)
+go.property('regular_speed', 50)
 
-go.property('friction', 0.5)
+go.property('crouching_friction', 0.07)
+go.property('default_friction', 1)
+
+
+go.property('ice_friction', 0.07)
+go.property('ice_speed', 20)
 
 function init(self)
   self.correction = vmath.vector3()
@@ -78,6 +81,9 @@ function init(self)
   self.slide_effect = 1
   self.dx = 0
   self.dy = 0
+
+  self.friction = self.default_friction
+  self.ice_physics = false
   
   acquire_input()
 end
@@ -86,8 +92,7 @@ local function slide_on_collision(self, message)
   local group = message.other_group
   if
     group == collisions.map_terrain or
-    group == collisions.map_terrains or
-    group == collisions.stone
+    group == collisions.box
   then
     if message.distance > 0 then
       local proj = vmath.project(self.correction, message.normal * message.distance)
@@ -101,19 +106,8 @@ local function slide_on_collision(self, message)
 end
 
 local function animation_done(self, message)
-  local function end_rolling()
-    self.start_decresing_rolling_speed = false
-    self.rolling = false
-    self.actual_speed = self.speed
-    self.can_roll = false
-    update_animation(self)
-  end
-
   local jumpt = {
-    [roll_right] = end_rolling,
-    [roll_left] = end_rolling,
-    [roll_up] = end_rolling,
-    [roll_down] = end_rolling,
+    
   } 
   
   if jumpt[message.id] then jumpt[message.id]() end
@@ -162,11 +156,23 @@ local function update_animation(self)
 end
 
 local function update_move(self, dt)
-  local z = go.get_position().z
-  go.set_position(vmath.vector3(
-    go.get_position().x + self.dx * self.walking_speed * dt,
-    go.get_position().y + self.dy * self.walking_speed * dt,
-    z))
+  local x, y
+  local speed = self.regular_speed
+
+  if self.crouching then
+    self.friction = self.crouching_friction
+  else
+    self.friction = self.default_friction
+  end
+  if self.ice_physics then
+    self.friction = self.friction * self.ice_friction
+    speed = self.ice_speed
+  end
+
+
+  x = go.get_position().x + self.dx * speed * dt
+  y = go.get_position().y + self.dy * speed * dt
+  set_xy_pos(x, y)
 
   self.dx = self.dx * (1 - self.friction)
   self.dy = self.dy * (1 - self.friction)
@@ -176,8 +182,6 @@ local function update_move(self, dt)
 
   self.dx = self.dx + kx
   self.dy = self.dy + ky
-
-  go.set_position(vmath.vector3(go.get_position().x, go.get_position().y, z))
 end
 
 local function reset_vars(self)

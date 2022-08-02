@@ -1,17 +1,13 @@
 key_trigger {
-  input: KEY_LSHIFT
+  input: KEY_Z
   action: "action"
 }
 key_trigger {
-  input: KEY_C
-  action: "attack"
-}
-key_trigger {
-  input: KEY_Z
+  input: KEY_X
   action: "item1"
 }
 key_trigger {
-  input: KEY_X
+  input: KEY_C
   action: "item2"
 }
 key_trigger {

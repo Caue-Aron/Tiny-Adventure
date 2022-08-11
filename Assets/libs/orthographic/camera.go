@@ -14,13 +14,18 @@ components {
   }
   properties {
     id: "center_x"
-    value: "80.0"
+    value: "96.0"
     type: PROPERTY_TYPE_NUMBER
   }
   properties {
     id: "center_y"
-    value: "75.0"
+    value: "80.0"
     type: PROPERTY_TYPE_NUMBER
+  }
+  properties {
+    id: "center_cam"
+    value: "false"
+    type: PROPERTY_TYPE_BOOLEAN
   }
   properties {
     id: "near_z"

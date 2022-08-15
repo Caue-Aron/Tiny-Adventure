@@ -1,5 +1,0 @@
-go.property('text_key', 0)
-
-function init(self)
-  
-end

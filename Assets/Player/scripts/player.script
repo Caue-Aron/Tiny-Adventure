@@ -151,7 +151,7 @@ function on_message(self, message_id, message)
       end
       local trigger_fun_t = {
         [trigger.sign] = function ()
-          print 'foi'
+          
         end
       }
 

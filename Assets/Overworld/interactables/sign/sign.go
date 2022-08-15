@@ -1,6 +1,6 @@
 components {
-  id: "sign1"
-  component: "/Assets/Overworld/interactables/sign/sign.script"
+  id: "script"
+  component: "/Assets/Overworld/interactables/sign/sign-script.script"
   position {
     x: 0.0
     y: 0.0

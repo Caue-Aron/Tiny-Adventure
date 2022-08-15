@@ -1,7 +1,7 @@
 embedded_components {
   id: "sprite"
   type: "sprite"
-  data: "tile_set: \"/Assets/Overworld/tilesources/overworldDay.tilesource\"\n"
+  data: "tile_set: \"/Assets/Overworld/maps/tilesources/overworldDay.tilesource\"\n"
   "default_animation: \"box\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "blend_mode: BLEND_MODE_ALPHA\n"

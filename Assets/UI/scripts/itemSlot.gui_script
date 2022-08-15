@@ -1,0 +1,31 @@
+local itemslots
+local itemz
+local itemx
+local itemc
+local itemv
+
+local function set_all_slots_pos(slots)
+  
+end
+
+function init(self)
+  itemslots = gui.get_node('slots')
+  itemz = gui.get_node('slotz')
+  itemx = gui.get_node('slotx')
+  itemc = gui.get_node('slotc')
+  itemv = gui.get_node('slotv')
+
+  local w, h = window.get_size()
+  w = w - (
+    gui.get_size(itemz) +
+    gui.get_size(itemx) +
+    gui.get_size(itemc) +
+    gui.get_size(itemv)).x * 1.8
+    
+  h = h - h * (10/100)
+
+  local position = vmath.vector3(
+    w, h, gui.get_position(itemslots).z
+  )
+  gui.set_position(itemslots, position)
+end

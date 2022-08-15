@@ -39,7 +39,7 @@ components {
   }
   properties {
     id: "zoom"
-    value: "5.0"
+    value: "4.0"
     type: PROPERTY_TYPE_NUMBER
   }
   properties {

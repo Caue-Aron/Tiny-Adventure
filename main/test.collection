@@ -1,7 +1,7 @@
 name: "main"
 instances {
-  id: "HUD"
-  prototype: "/Assets/UI/OG/GOs/HUD.go"
+  id: "newHUD"
+  prototype: "/Assets/UI/GOs/newHUD.go"
   position {
     x: 0.0
     y: 0.0
@@ -23,7 +23,7 @@ collection_instances {
   id: "player"
   collection: "/Assets/Player/player.collection"
   position {
-    x: 103.0
+    x: 188.0
     y: 93.0
     z: 1.0
   }
@@ -33,22 +33,6 @@ collection_instances {
     z: 0.0
     w: 1.0
   }
-  instance_properties {
-    id: "player"
-    properties {
-      id: "player"
-      properties {
-        id: "crouching_friction"
-        value: "0.2"
-        type: PROPERTY_TYPE_NUMBER
-      }
-      properties {
-        id: "default_friction"
-        value: "0.7"
-        type: PROPERTY_TYPE_NUMBER
-      }
-    }
-  }
   scale3 {
     x: 1.0
     y: 1.0
@@ -57,7 +41,7 @@ collection_instances {
 }
 collection_instances {
   id: "test_map"
-  collection: "/Assets/Overworld/worlds/test_map.collection"
+  collection: "/Assets/Overworld/maps/collections/test_map.collection"
   position {
     x: 0.0
     y: 0.0
@@ -68,6 +52,42 @@ collection_instances {
     y: 0.0
     z: 0.0
     w: 1.0
+  }
+  instance_properties {
+    id: "camera"
+    properties {
+      id: "camera"
+      properties {
+        id: "center_cam"
+        value: "false"
+        type: PROPERTY_TYPE_BOOLEAN
+      }
+      properties {
+        id: "follow"
+        value: "true"
+        type: PROPERTY_TYPE_BOOLEAN
+      }
+      properties {
+        id: "follow_immediately"
+        value: "true"
+        type: PROPERTY_TYPE_BOOLEAN
+      }
+      properties {
+        id: "follow_target"
+        value: "/player/player"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "follow_lerp"
+        value: "0.2"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "follow_offset"
+        value: "5.0, 5.0, 0.0"
+        type: PROPERTY_TYPE_VECTOR3
+      }
+    }
   }
   scale3 {
     x: 1.0

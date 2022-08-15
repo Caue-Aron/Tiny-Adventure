@@ -1,8 +1,0 @@
-require 'Assets.Modules.signs'
-
-go.property('stage', 0)
-go.property('key', 0)
-
-function init(self)
-  go.property('text', sign_texts[self.stage][self.key])
-end

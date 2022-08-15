@@ -16,3 +16,7 @@ collisions = {
 trigger = {
   sign = hash 'sign'
 }
+
+msgs = {
+  read_sign = hash 'read-sign'
+}

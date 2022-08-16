@@ -1,73 +1,26 @@
 name: "default"
-instances {
-  id: "camera"
-  prototype: "/Assets/libs/orthographic/camera.go"
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  component_properties {
-    id: "camera"
-    properties {
-      id: "center_cam"
-      value: "true"
-      type: PROPERTY_TYPE_BOOLEAN
-    }
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-instances {
-  id: "sign"
-  prototype: "/Assets/Overworld/interactables/sign/sign.go"
-  position {
-    x: 120.0
-    y: 104.0
-    z: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-instances {
-  id: "sign1"
-  prototype: "/Assets/Overworld/interactables/sign/sign.go"
-  position {
-    x: 232.0
-    y: 168.0
-    z: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
 scale_along_z: 0
+embedded_instances {
+  id: "map"
+  children: "tilemap"
+  data: ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
 embedded_instances {
   id: "tilemap"
   data: "components {\n"
@@ -92,10 +45,10 @@ embedded_instances {
     z: 0.0
   }
   rotation {
-    x: 0.0
+    x: -0.70710677
     y: 0.0
     z: 0.0
-    w: 1.0
+    w: 0.70710677
   }
   scale3 {
     x: 1.0

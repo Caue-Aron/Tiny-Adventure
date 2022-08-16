@@ -3,6 +3,10 @@ require 'Assets.Modules.signs'
 go.property('stage', 0)
 go.property('key', 0)
 
+function init(self)
+  go.set(".", "euler.x", -30)
+end
+
 function on_message(self, message_id, message, sender)
   if message_id == msgs.read_sign then
     if self.text == nil then

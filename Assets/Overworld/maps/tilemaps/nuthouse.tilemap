@@ -1118,7 +1118,7 @@ layers {
   cell {
     x: 7
     y: 6
-    tile: 42
+    tile: 40
     h_flip: 0
     v_flip: 0
     rotate90: 0
@@ -1878,7 +1878,7 @@ layers {
   cell {
     x: 14
     y: 10
-    tile: 42
+    tile: 40
     h_flip: 0
     v_flip: 0
     rotate90: 0
@@ -2292,5 +2292,5 @@ layers {
     rotate90: 0
   }
 }
-material: "/builtins/materials/tile_map.material"
+material: "/rendercam/tilemap.material"
 blend_mode: BLEND_MODE_ALPHA

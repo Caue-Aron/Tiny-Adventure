@@ -1,6 +1,6 @@
 [bootstrap]
 main_collection = /main/test.collectionc
-render = /Assets/libs/orthographic/render/orthographic.renderc
+render = /rendercam/rendercam.renderc
 
 [script]
 shared_state = 1

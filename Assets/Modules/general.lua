@@ -1,3 +1,7 @@
+general_init = {
+  xrotation = -30
+}
+
 key = {
   left    = hash "left",
   right   = hash "right",

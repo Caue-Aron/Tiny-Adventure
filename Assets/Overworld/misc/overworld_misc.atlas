@@ -1,0 +1,19 @@
+images {
+  image: "/Assets/Overworld/misc/bush/sprites/bush.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/Overworld/misc/bush/sprites/bush-shadow.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/Overworld/misc/sunflower/sprites/flower.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/Assets/Overworld/misc/sunflower/sprites/caule.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+margin: 0
+extrude_borders: 2
+inner_padding: 0

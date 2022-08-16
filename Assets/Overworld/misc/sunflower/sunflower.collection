@@ -1,0 +1,72 @@
+name: "default"
+instances {
+  id: "sunflower"
+  prototype: "/Assets/Overworld/misc/sunflower/flower.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "caule"
+  data: "components {\n"
+  "  id: \"caule\"\n"
+  "  component: \"/Assets/Overworld/misc/sunflower/caule.sprite\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: -13.0\n"
+  "    z: 7.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: -0.25881904\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 0.9659258\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"caule1\"\n"
+  "  component: \"/Assets/Overworld/misc/sunflower/caule.sprite\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: -26.0\n"
+  "    z: 14.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: -0.25881904\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 0.9659258\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 1.0
+    z: -1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}

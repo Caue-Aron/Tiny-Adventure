@@ -30,4 +30,5 @@ subpixels = 1
 
 [physics]
 debug = 0
+type = 3D
 

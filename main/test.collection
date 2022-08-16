@@ -13,33 +13,25 @@ instances {
     z: 0.0
     w: 1.0
   }
-  component_properties {
-    id: "script"
-    properties {
-      id: "z_offset"
-      value: "70.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-    properties {
-      id: "nearZ"
-      value: "-1000.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-    properties {
-      id: "farZ"
-      value: "1000.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-    properties {
-      id: "viewDistance"
-      value: "1000.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-    properties {
-      id: "fixedAspectRatio"
-      value: "true"
-      type: PROPERTY_TYPE_BOOLEAN
-    }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "sign"
+  prototype: "/Assets/Overworld/interactables/sign/sign.go"
+  position {
+    x: 66.0
+    y: 6.0
+    z: -46.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
   }
   scale3 {
     x: 1.0

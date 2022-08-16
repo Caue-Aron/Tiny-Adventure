@@ -1,0 +1,4 @@
+tile_set: "/Assets/Overworld/misc/overworld_misc.atlas"
+default_animation: "caule"
+material: "/builtins/materials/sprite.material"
+blend_mode: BLEND_MODE_ALPHA

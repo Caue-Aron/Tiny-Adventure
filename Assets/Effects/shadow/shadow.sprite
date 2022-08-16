@@ -1,0 +1,4 @@
+tile_set: "/Assets/Effects/shadow/shadows.tilesource"
+default_animation: "sign"
+material: "/builtins/materials/sprite.material"
+blend_mode: BLEND_MODE_ALPHA

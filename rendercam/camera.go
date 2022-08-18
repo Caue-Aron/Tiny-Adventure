@@ -14,7 +14,7 @@ components {
   }
   properties {
     id: "z_offset"
-    value: "100.0"
+    value: "125.0"
     type: PROPERTY_TYPE_NUMBER
   }
   properties {

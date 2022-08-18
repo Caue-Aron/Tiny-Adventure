@@ -16,6 +16,7 @@ end
 function init(self)
 	self.tilemap_pred = render.predicate({"tilemap"})
 	self.gui_pred = render.predicate({"gui"})
+	self.shadows_pred = render.predicate({"shadows"})
 	self.text_pred = render.predicate({"text"})
 	self.model_pred = render.predicate({"model"})
 	self.particle_pred = render.predicate({"particle"})
@@ -52,6 +53,7 @@ function update(self)
 	render.disable_state(render.STATE_CULL_FACE)
 
 	render.draw(self.tilemap_pred)
+	render.draw(self.shadows_pred)
 	render.draw(self.sprite_pred)
 	render.draw(self.particle_pred)
 

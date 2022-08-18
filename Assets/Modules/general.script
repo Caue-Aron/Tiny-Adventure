@@ -1,0 +1,42 @@
+function x_pos(x)
+  if x then
+    go.set_position(vmath.vector3(x, go.get_position().y, go.get_position().z))
+  else
+    return go.get_position().x
+  end
+end
+
+function z_pos(z)
+  if z then
+    go.set_position(vmath.vector3(go.get_position().x, go.get_position().y, z))
+  else
+    return go.get_position().z
+  end
+end
+
+function y_pos(y)
+  if y then
+    go.set_position(vmath.vector3(go.get_position().x, y, go.get_position().z))
+  else
+    return go.get_position().y
+  end
+end
+
+function set_xz_pos(x, z)
+  go.set_position(vmath.vector3(x, go.get_position().y, z))
+end
+
+function acquire_input()
+  msg.post('.', hash('acquire_input_focus'))
+end
+
+function release_input()
+  msg.post('.', hash('release_input_focus'))
+end
+
+function quick_animation(self, sprite, anim)
+  if anim ~= self.current_anim then
+    msg.post(sprite, "play_animation", { id = anim })
+    self.current_anim = anim
+  end
+end

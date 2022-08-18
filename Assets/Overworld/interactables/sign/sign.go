@@ -15,11 +15,11 @@ components {
 }
 components {
   id: "shadow"
-  component: "/Assets/Effects/shadow/shadow.sprite"
+  component: "/Assets/Overworld/interactables/sign/shadow.sprite"
   position {
     x: 0.0
-    y: -6.0
-    z: 3.0
+    y: -7.0
+    z: 4.0
   }
   rotation {
     x: -0.70710677
@@ -31,7 +31,7 @@ components {
 embedded_components {
   id: "sprite"
   type: "sprite"
-  data: "tile_set: \"/Assets/Overworld/maps/tilesources/overworldDay.tilesource\"\n"
+  data: "tile_set: \"/Assets/Overworld/tilesources/overworld.atlas\"\n"
   "default_animation: \"sign\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "blend_mode: BLEND_MODE_ALPHA\n"
@@ -77,7 +77,7 @@ embedded_components {
   "  }\n"
   "  data: 8.0\n"
   "  data: 7.4985\n"
-  "  data: 5.0\n"
+  "  data: 3.5\n"
   "}\n"
   "linear_damping: 0.0\n"
   "angular_damping: 0.0\n"

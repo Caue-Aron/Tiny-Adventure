@@ -1,4 +1,4 @@
-image: "/Assets/Overworld/sprites/day/city.png"
+image: "/Assets/Overworld/maps/_sprites/day/city.png"
 tile_width: 16
 tile_height: 16
 tile_margin: 0

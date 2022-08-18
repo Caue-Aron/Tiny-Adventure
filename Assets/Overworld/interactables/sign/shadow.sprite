@@ -1,4 +1,4 @@
 tile_set: "/Assets/Overworld/tilesources/overworld.atlas"
-default_animation: "caule"
-material: "/builtins/materials/sprite.material"
+default_animation: "sign-shadow"
+material: "/Assets/Materials/shadows.material"
 blend_mode: BLEND_MODE_ALPHA

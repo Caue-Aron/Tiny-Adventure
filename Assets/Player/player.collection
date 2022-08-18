@@ -4,7 +4,7 @@ embedded_instances {
   id: "player"
   data: "components {\n"
   "  id: \"player\"\n"
-  "  component: \"/Assets/Player/scripts/player.script\"\n"
+  "  component: \"/Assets/Player/player.script\"\n"
   "  position {\n"
   "    x: 0.0\n"
   "    y: 0.0\n"

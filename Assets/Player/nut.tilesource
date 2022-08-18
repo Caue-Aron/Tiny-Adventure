@@ -1,4 +1,4 @@
-image: "/Assets/Player/sprites/NutCharacter.png"
+image: "/Assets/Player/NutCharacter.png"
 tile_width: 16
 tile_height: 24
 tile_margin: 0

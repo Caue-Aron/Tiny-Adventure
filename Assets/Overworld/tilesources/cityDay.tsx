@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.9" tiledversion="1.9.0" name="nuthouse" tilewidth="16" tileheight="16" tilecount="100" columns="10">
- <image source="../../sprites/day/city.png" width="160" height="160"/>
+ <image source="../maps/sprites/day/city.png" width="160" height="160"/>
  <wangsets>
   <wangset name="Conjunto Sem Nome" type="corner" tile="-1">
    <wangcolor name="" color="#ff0000" tile="-1" probability="1"/>

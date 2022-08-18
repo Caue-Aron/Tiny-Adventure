@@ -1,4 +1,20 @@
 {   
+    
+"files.exclude": {
+    "**/*.aseprite": true,
+    "**/*.atlas": true,
+    "**/*.collection": true,
+    "**/*.go": true,
+    "**/*.tilesource": true,
+    "**/*.png": true,
+    "**/*.tilemap": true,
+    "**/*.tmx": true,
+    "**/*.render": true,
+    "**/*.material": true,
+    "**/*.project": true,
+    "**/*.sprite": true,
+    "**/_sprites": true
+  },
     // Editor
     "editor.suggest.localityBonus": true,
     "editor.suggestSelection": "recentlyUsedByPrefix",

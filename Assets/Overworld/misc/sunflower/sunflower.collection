@@ -1,11 +1,11 @@
 name: "default"
-instances {
-  id: "sunflower"
-  prototype: "/Assets/Overworld/misc/sunflower/flower.go"
+collection_instances {
+  id: "flower"
+  collection: "/Assets/Overworld/misc/sunflower/flower.collection"
   position {
     x: 0.0
     y: 0.0
-    z: 0.0
+    z: 4.0
   }
   rotation {
     x: 0.0
@@ -42,7 +42,7 @@ embedded_instances {
   "  component: \"/Assets/Overworld/misc/sunflower/caule.sprite\"\n"
   "  position {\n"
   "    x: 0.0\n"
-  "    y: -26.0\n"
+  "    y: -26.5\n"
   "    z: 14.0\n"
   "  }\n"
   "  rotation {\n"
@@ -50,6 +50,26 @@ embedded_instances {
   "    y: 0.0\n"
   "    z: 0.0\n"
   "    w: 0.9659258\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"sprite\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"tile_set: \\\"/Assets/Overworld/tilesources/overworld.atlas\\\"\\n"
+  "default_animation: \\\"sunflower-shadow\\\"\\n"
+  "material: \\\"/Assets/Materials/shadows.material\\\"\\n"
+  "blend_mode: BLEND_MODE_ALPHA\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.5\n"
+  "    y: -33.6\n"
+  "    z: 18.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.70710677\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 0.70710677\n"
   "  }\n"
   "}\n"
   ""

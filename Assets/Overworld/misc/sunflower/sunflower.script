@@ -1,3 +1,5 @@
 function init(self)
-  go.animate('.', 'euler.z', go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_LINEAR, 3, 0)
+  local angle = 15
+  go.set('rotation', 'euler.z', -angle)
+  go.animate('rotation', 'euler.z', go.PLAYBACK_LOOP_PINGPONG, angle, go.EASING_LINEAR, 3, 0)
 end

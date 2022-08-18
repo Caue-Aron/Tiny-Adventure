@@ -19,13 +19,213 @@ instances {
     z: 1.0
   }
 }
-collection_instances {
-  id: "phteste"
-  collection: "/Assets/Overworld/misc/sunflower/levels/sunflower_PH_teste.collection"
+instances {
+  id: "sign"
+  prototype: "/Assets/Overworld/interactables/sign/sign.go"
   position {
+    x: 77.0
+    y: 0.0
+    z: -54.0
+  }
+  rotation {
     x: 0.0
-    y: 32.0
+    y: 0.0
     z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "sunflower"
+  collection: "/Assets/Overworld/misc/sunflower/sunflower.collection"
+  position {
+    x: 31.0
+    y: 33.0
+    z: -57.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "sunflower1"
+  collection: "/Assets/Overworld/misc/sunflower/sunflower.collection"
+  position {
+    x: 101.0
+    y: 33.0
+    z: -175.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "sunflower2"
+  collection: "/Assets/Overworld/misc/sunflower/sunflower.collection"
+  position {
+    x: 207.0
+    y: 33.0
+    z: -40.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "sunflower3"
+  collection: "/Assets/Overworld/misc/sunflower/sunflower.collection"
+  position {
+    x: 333.0
+    y: 33.0
+    z: -198.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "sunflower4"
+  collection: "/Assets/Overworld/misc/sunflower/sunflower.collection"
+  position {
+    x: 302.0
+    y: 33.0
+    z: -198.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "sunflower5"
+  collection: "/Assets/Overworld/misc/sunflower/sunflower.collection"
+  position {
+    x: 268.0
+    y: 33.0
+    z: -198.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "sunflower6"
+  collection: "/Assets/Overworld/misc/sunflower/sunflower.collection"
+  position {
+    x: 234.0
+    y: 33.0
+    z: -198.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "sunflower7"
+  collection: "/Assets/Overworld/misc/sunflower/sunflower.collection"
+  position {
+    x: 23.0
+    y: 33.0
+    z: -180.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "sunflower8"
+  collection: "/Assets/Overworld/misc/sunflower/sunflower.collection"
+  position {
+    x: 60.0
+    y: 33.0
+    z: -216.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "sunflower9"
+  collection: "/Assets/Overworld/misc/sunflower/sunflower.collection"
+  position {
+    x: 327.0
+    y: 33.0
+    z: -67.0
   }
   rotation {
     x: 0.0
@@ -99,11 +299,11 @@ embedded_instances {
 embedded_instances {
   id: "misc"
   children: "bushes"
-  children: "sunflowers"
+  children: "signs"
   data: ""
   position {
     x: 0.0
-    y: 12.0
+    y: 0.0
     z: 0.0
   }
   rotation {
@@ -124,7 +324,7 @@ embedded_instances {
   data: ""
   position {
     x: 0.0
-    y: 0.0
+    y: 12.0
     z: 0.0
   }
   rotation {
@@ -140,12 +340,13 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "sunflowers"
+  id: "signs"
+  children: "sign"
   data: ""
   position {
-    x: 66.0
-    y: 21.0
-    z: -150.0
+    x: 0.0
+    y: 7.3
+    z: 0.0
   }
   rotation {
     x: 0.0

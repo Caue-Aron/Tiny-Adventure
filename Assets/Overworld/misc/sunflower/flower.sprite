@@ -1,4 +1,4 @@
-tile_set: "/Assets/Overworld/misc/overworld_misc.atlas"
+tile_set: "/Assets/Overworld/tilesources/overworld.atlas"
 default_animation: "flower"
 material: "/builtins/materials/sprite.material"
 blend_mode: BLEND_MODE_ALPHA

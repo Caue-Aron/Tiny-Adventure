@@ -1,45 +1,22 @@
---[[
-  
-]]
 local debugger = require('debugger.debugger')
 debugger.start()
 
 require 'Assets.Modules.general'
+local movement = require 'Assets.Player.walk'
 
 local nutsprite = '#sprite'
-
-local idle_up = hash 'idle-up'
-local walk_up = hash 'walk-up'
-local roll_up = hash 'roll-up'
-local stop_roll_up = hash 'stop-roll-up'
-
-local idle_right = hash 'idle-right'
-local walk_right = hash 'walk-right'
-local roll_right = hash 'roll-right'
-local stop_roll_right = hash 'stop-roll-right'
-
-local idle_left = hash 'idle-left'
-local walk_left = hash 'walk-left'
-local roll_left = hash 'roll-left'
-local stop_roll_left = hash 'stop-roll-left'
-
-local idle_down = hash 'idle-down'
-local walk_down = hash 'walk-down'
-local roll_down = hash 'roll-up'
-local stop_roll_down = hash 'stop-roll-up'
-
 local default_anim = idle_down
 
-local dir_right = 'r'
-local dir_down = 'd'
-local dir_up = 'u'
-local dir_left = 'l'
+go.property('regular_speed', 50)
+go.property('rolling_speed', 100)
+
+go.property('regular_friction', 0.07)
 
 function x_pos(x)
   if x then
     go.set_position(vmath.vector3(x, go.get_position().y, go.get_position().z))
   else
-    return go.get('.', 'position').x
+    return go.get_position().x
   end
 end
 
@@ -47,7 +24,7 @@ function z_pos(z)
   if z then
     go.set_position(vmath.vector3(go.get_position().x, go.get_position().y, z))
   else
-    return go.get('.', 'position').z
+    return go.get_position().z
   end
 end
 
@@ -55,7 +32,7 @@ function y_pos(y)
   if y then
     go.set_position(vmath.vector3(go.get_position().x, y, go.get_position().z))
   else
-    return go.get('.', 'position').y
+    return go.get_position().y
   end
 end
 
@@ -63,8 +40,12 @@ function set_xz_pos(x, z)
   go.set_position(vmath.vector3(x, go.get_position().y, z))
 end
 
-function acquire_input ()
+function acquire_input()
   msg.post('.', hash('acquire_input_focus'))
+end
+
+function release_input()
+  msg.post('.', hash('release_input_focus'))
 end
 
 function quick_animation(self, sprite, anim)
@@ -73,11 +54,6 @@ function quick_animation(self, sprite, anim)
     self.current_anim = anim
   end
 end
-
-go.property('regular_speed', 50)
-go.property('rolling_speed', 100)
-
-go.property('regular_friction', 0.07)
 
 function init(self)
   self.correction = vmath.vector3()
@@ -110,10 +86,10 @@ function init(self)
 end
 
 function on_message(self, message_id, message)
+  print(message_id)
   local msg_fun_t = {
     [hash "contact_point_response"] = function ()
       local group = message.other_group
-
       if
         group == collisions.overworld
       then
@@ -128,28 +104,9 @@ function on_message(self, message_id, message)
       end
     end,
   
-    [hash "animation_done"] = function ()
-      local function stopped_roll()
-        self.can_move = true
-        self.can_roll = true
-        self.state = self.walking
-        self.last_dir_vector = vmath.vector3()
-      end
-    
-      local function roll()
-        self.state = self.stoped_rolling
-      end
-    
+    [hash "animation_done"] = function ()    
       local jumpt = {
-        [stop_roll_up] = stopped_roll,
-        [stop_roll_right] = stopped_roll,
-        [stop_roll_down] = stopped_roll,
-        [stop_roll_left] = stopped_roll,
-    
-        [roll_up] = roll,
-        [roll_right] = roll,
-        [roll_left] = roll,
-        [roll_down] = roll,
+        
       } 
       
       if jumpt[message.id] then
@@ -162,7 +119,7 @@ function on_message(self, message_id, message)
         self.frozen = true
         quick_animation(self, nutsprite, idle_up)
 
-        if go.get(message.other_id, 'position') + vmath.vector3(0, 0, 20) ~= go.get_position() then
+        if go.get(message.other_id, 'position') + vmath.vector3(0, 0, 10) ~= go.get_position() then
           go.animate('.', 'position', go.PLAYBACK_ONCE_FORWARD, go.get(message.other_id, 'position') + vmath.vector3(0, 0, 10), go.EASING_OUTCUBIC , 0.65, 0,
           function ()
             msg.post(message.other_id, msgs.read_sign)
@@ -186,6 +143,7 @@ function on_message(self, message_id, message)
       else
         self.on_action_area = false
         self.action_area_group = nil
+        self.on_action_fun = nil
       end
     end,
 
@@ -200,84 +158,22 @@ function on_message(self, message_id, message)
   end
 end
 
-function update(self, dt)
-  local function update_animation(self)
-    local anim = default_anim
-
-    local updateAnimation_fun_t = {
-      [self.walking] = function ()
-
-        if self.dir.x > 0 then
-          anim = walk_right
-
-        elseif self.dir.x < 0 then
-          anim = walk_left
-
-        elseif self.dir.z > 0 then
-          anim = walk_down
-
-        elseif self.dir.z < 0 then
-          anim = walk_up
-
-        else
-          if self.last_dir == dir_down then
-            anim = idle_down
-
-          elseif self.last_dir == dir_left then
-            anim = idle_left
-            
-          elseif self.last_dir == dir_right then
-            anim = idle_right
-
-          elseif self.last_dir == dir_up then
-            anim = idle_up
-          end
-        end
-      end,
-    }
-
-    if updateAnimation_fun_t[self.state] then
-      updateAnimation_fun_t[self.state]()
-    else
-      print('no move function for: ', self.state)
-    end
-
-    quick_animation(self, nutsprite, anim)
-  end
-
-  local function update_move(self, dt)
-    local x, z, dir
-
-    self.speed = self.regular_speed
-    dir = self.dir
-
-    if dir ~= vmath.vector3() then
-      dir = vmath.normalize(dir)
-    end
-
-    x = go.get_position().x + self.dx * self.speed * dt
-    z = go.get_position().z + self.dz * self.speed * dt
-    set_xz_pos(x, z)
-
-    self.dx = self.dx * (1 - self.friction)
-    self.dz = self.dz * (1 - self.friction)
-
-    local kx = dir.x
-    local kz = dir.z
-
-    self.dx = self.dx + kx
-    self.dz = self.dz + kz
-
-  end
-
+function update(self, dt)  
   local function reset_vars(self)
     self.dir = vmath.vector3()
     self.correction = vmath.vector3()
   end
 
   if not self.frozen then
-    update_move(self, dt)
-    update_animation(self)
+    -- movement
+    local newx, newz = movement.move(self, dt, x_pos(), z_pos())
+    set_xz_pos(newx, newz)
+
+    -- animation
+    local anim = movement.animation(self) or default_anim
+    quick_animation(self, nutsprite, anim)
+    
+
     reset_vars(self)
   end
 end
@@ -350,7 +246,6 @@ function on_input(self, action_id, action)
   local function input_text_scroll(self, action_id, action)
     if self.on_action_area and action_id == key.action  then
       if action.pressed then
-        print('text scroll')
         self.frozen = false
       end
     end

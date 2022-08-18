@@ -1,7 +1,7 @@
 embedded_components {
   id: "sprite"
   type: "sprite"
-  data: "tile_set: \"/Assets/Overworld/misc/overworld_misc.atlas\"\n"
+  data: "tile_set: \"/Assets/Overworld/tilesources/overworld.atlas\"\n"
   "default_animation: \"bush\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "blend_mode: BLEND_MODE_ALPHA\n"
@@ -69,14 +69,14 @@ embedded_components {
 embedded_components {
   id: "shadow"
   type: "sprite"
-  data: "tile_set: \"/Assets/Overworld/misc/overworld_misc.atlas\"\n"
+  data: "tile_set: \"/Assets/Overworld/tilesources/overworld.atlas\"\n"
   "default_animation: \"bush-shadow\"\n"
-  "material: \"/builtins/materials/sprite.material\"\n"
+  "material: \"/Assets/Materials/shadows.material\"\n"
   "blend_mode: BLEND_MODE_ALPHA\n"
   ""
   position {
     x: 0.0
-    y: -13.0
+    y: -12.0
     z: 7.0
   }
   rotation {

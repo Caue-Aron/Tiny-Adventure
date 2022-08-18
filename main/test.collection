@@ -3,35 +3,15 @@ instances {
   id: "camera"
   prototype: "/rendercam/camera.go"
   position {
-    x: 170.0
-    y: 147.0
+    x: 93.0
+    y: 180.0
     z: 123.0
   }
   rotation {
     x: 0.0
-    y: 0.0
+    y: 0.70710677
     z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-instances {
-  id: "sign"
-  prototype: "/Assets/Overworld/interactables/sign/sign.go"
-  position {
-    x: 66.0
-    y: 6.0
-    z: -46.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
+    w: 0.70710677
   }
   scale3 {
     x: 1.0
@@ -63,9 +43,9 @@ collection_instances {
   id: "player"
   collection: "/Assets/Player/player.collection"
   position {
-    x: 206.0
+    x: 164.0
     y: 6.0
-    z: -3.0
+    z: -30.0
   }
   rotation {
     x: 0.0
